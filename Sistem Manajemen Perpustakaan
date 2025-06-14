@@ -1,9 +1,13 @@
 #include <iostream>
-
 #include <vector>
 #include <queue>
 #include <stack>
+#include <algorithm>
+using namespace std;
 
-
-#include <vector
-#include <queue>
+struct Buku {
+    int id;
+    string judul, pengarang, kategori;
+    int tahun;
+    bool tersedia = true;
+};
