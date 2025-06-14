@@ -2,11 +2,4 @@
 #include <vector>
 #include <queue>
 #include <stack>
-#include <algorithm>
 
-stcuk Buku {
-ind id;
-string judul, pengarang, kategori;
-int tahun;
-bool tersedia = true;
-};
