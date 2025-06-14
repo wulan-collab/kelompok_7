@@ -1,3 +1,24 @@
 #include <iostream>
-#include <vector
+#include <vector>
 #include <queue>
+#include <stack>
+#include <algorithm>
+using namespace std;
+
+struct Buku {
+    int id;
+    string judul, pengarang, kategori;
+    int tahun;
+    bool tersedia = true;
+};
+
+struct Anggota {
+    int id;
+    string nama;
+};
+
+vector<Buku> daftarBuku;
+vector<Anggota> daftarAnggota;
+queue<int> antrianPinjam;
+stack<string> riwayatKembali;
+int idBuku = 1, idAnggota = 1;
