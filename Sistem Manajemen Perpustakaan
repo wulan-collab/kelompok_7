@@ -1,13 +1,32 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <stack>
-#include <algorithm>
-using namespace std;
-
-struct Buku {
-    int id;
-    string judul, pengarang, kategori;
-    int tahun;
-    bool tersedia = true;
-};
+void menu() {
+    int pilihan;
+    do {
+// menampilkan menu
+        cout << "\n=== MANAJEMEN PERPUSTAKAAN ===\n";
+        cout << "1. Tambah Buku\n2. Tambah Anggota\n3. Lihat Buku\n4. Lihat Anggota\n";
+        cout << "5. Edit Buku\n6. Hapus Buku\n7. Antri Peminjaman\n8. Proses Peminjaman\n";
+        cout << "9. Kembalikan Buku\n10. Riwayat Pengembalian\n11. Cari Buku\n12. Urutkan Buku (Judul)\n";
+        cout << "0. Keluar\nPilihan: ";
+        cin >> pilihan;  // menerima inputan
+    // menjalankan fungsi
+        switch (pilihan) {
+            case 1: tambahBuku(); break;
+            case 2: tambahAnggota(); break;
+            case 3: tampilkanBuku(); break;
+            case 4: tampilkanAnggota(); break;
+            case 5: ubahBuku(); break;
+            case 6: hapusBuku(); break;
+            case 7: antriPinjamBuku(); break;
+            case 8: prosesAntrian(); break;
+            case 9: kembalikanBuku(); break;
+            case 10: lihatRiwayatPengembalian(); break;
+            case 11: cariBuku(); break;
+            case 12: urutkanBukuJudul(); break;
+        }
+    } while (pilihan != 0);
+}
+// memanggil menu 
+int main() {
+    menu();
+    return 0;
+}
