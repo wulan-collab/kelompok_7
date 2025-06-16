@@ -1,2 +1,6 @@
-#include <iostream>
-#include <vector
+void antriPinjamBuku() {
+    int id;
+    cout << "Masukkan ID Buku untuk antri: "; cin >> id;
+    antrianPinjam.push(id);
+    cout << "Buku ditambahkan ke antrian.\n";
+}
