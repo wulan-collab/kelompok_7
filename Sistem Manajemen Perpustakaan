@@ -4,3 +4,19 @@ void antriPinjamBuku() {
     antrianPinjam.push(id);
     cout << "Buku ditambahkan ke antrian.\n";
 }
+
+void prosesAntrian() {
+    if (antrianPinjam.empty()) {
+        cout << "Antrian kosong.\n";
+        return;
+    }
+    int id = antrianPinjam.front(); antrianPinjam.pop();
+    for (auto& b : daftarBuku) {
+        if (b.id == id && b.tersedia) {
+            b.tersedia = false;
+            cout << "Buku '" << b.judul << "' berhasil dipinjam.\n";
+            return;
+        }
+    }
+    cout << "Buku tidak tersedia.\n";
+}
