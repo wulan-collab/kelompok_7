@@ -20,3 +20,17 @@ void prosesAntrian() {
     }
     cout << "Buku tidak tersedia.\n";
 }
+
+void kembalikanBuku() {
+    int id;
+    cout << "Masukkan ID Buku yang dikembalikan: "; cin >> id;
+    for (auto& b : daftarBuku) {
+        if (b.id == id) {
+            b.tersedia = true;
+            riwayatKembali.push("Buku '" + b.judul + "' dikembalikan.");
+            cout << "Buku berhasil dikembalikan.\n";
+            return;
+        }
+    }
+    cout << "ID tidak ditemukan.\n";
+}
