@@ -34,3 +34,12 @@ void kembalikanBuku() {
     }
     cout << "ID tidak ditemukan.\n";
 }
+
+void lihatRiwayatPengembalian() {
+    cout << "\nRiwayat Pengembalian:\n";
+    stack<string> temp = riwayatKembali;
+    while (!temp.empty()) {
+        cout << temp.top() << endl;
+        temp.pop();
+    }
+}
