@@ -78,4 +78,16 @@ void hapusBuku() {
     cout << "Masukkan ID Buku: "; cin >> id;
     daftarBuku.erase(remove_if(daftarBuku.begin(), daftarBuku.end(), [id](Buku b){ return b.id == id; }), daftarBuku.end());
     cout << "Buku berhasil dihapus.\n";
+    
+void cariBuku() {
+    string keyword;
+    cout << "Masukkan kata kunci (judul/pengarang/kategori): ";
+    cin.ignore(); getline(cin, keyword);
+    for (auto& b : daftarBuku) {
+        if (b.judul.find(keyword) != string::npos || b.pengarang.find(keyword) != string::npos || b.kategori.find(keyword) != string::npos)
+            cout << "ID: " << b.id << " | " << b.judul << endl;
+    }
 }
+void urutkanBukuJudul() {
+    sort(daftarBuku.begin(), daftarBuku.end(), [](Buku a, Buku b){ return a.judul < b.judul; });
+    cout << "Buku berhasil diurutkan berdasarkan judul.\n";
