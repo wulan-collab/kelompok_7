@@ -1,3 +1,84 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <algorithm>
+using namespace std;
+
+struct Buku {
+    int id;
+    string judul, pengarang, kategori;
+    int tahun;
+    bool tersedia = true;
+};
+
+struct Anggota {
+    int id;
+    string nama;
+};
+
+vector<Buku> daftarBuku;
+vector<Anggota> daftarAnggota;
+queue<int> antrianPinjam;
+stack<string> riwayatKembali;
+int idBuku = 1, idAnggota = 1;
+
+// ======== FUNGSI CRUD ========
+// [ANGGOTA 1]
+void tambahBuku() {
+    Buku b;
+    b.id = idBuku++;
+    cout << "Judul: "; cin.ignore(); getline(cin, b.judul);
+    cout << "Pengarang: "; getline(cin, b.pengarang);
+    cout << "Kategori: "; getline(cin, b.kategori);
+    cout << "Tahun terbit: "; cin >> b.tahun;
+    daftarBuku.push_back(b);
+    cout << "Buku berhasil ditambahkan.\n";
+}
+
+void tambahAnggota() {
+    Anggota a;
+    a.id = idAnggota++;
+    cout << "Nama anggota: "; cin.ignore(); getline(cin, a.nama);
+    daftarAnggota.push_back(a);
+    cout << "Anggota berhasil ditambahkan.\n";
+}
+
+void tampilkanBuku() {
+    cout << "\nDaftar Buku:\n";
+    for (auto& b : daftarBuku)
+        cout << "ID: " << b.id << " | " << b.judul << " | " << (b.tersedia ? "Tersedia" : "Dipinjam") << endl;
+}
+
+void tampilkanAnggota() {
+    cout << "\nDaftar Anggota:\n";
+    for (auto& a : daftarAnggota)
+        cout << "ID: " << a.id << " | " << a.nama << endl;
+}
+
+void ubahBuku() {
+    int id;
+    cout << "Masukkan ID Buku: "; cin >> id;
+    for (auto& b : daftarBuku) {
+        if (b.id == id) {
+            cout << "Judul baru: "; cin.ignore(); getline(cin, b.judul);
+            cout << "Pengarang baru: "; getline(cin, b.pengarang);
+            cout << "Kategori baru: "; getline(cin, b.kategori);
+            cout << "Tahun terbit baru: "; cin >> b.tahun;
+            cout << "Status (1=Tersedia, 0=Dipinjam): "; cin >> b.tersedia;
+            cout << "Data buku berhasil diperbarui.\n";
+            return;
+        }
+    }
+    cout << "Buku tidak ditemukan.\n";
+}
+
+void hapusBuku() {
+    int id;
+    cout << "Masukkan ID Buku: "; cin >> id;
+    daftarBuku.erase(remove_if(daftarBuku.begin(), daftarBuku.end(), [id](Buku b){ return b.id == id; }), daftarBuku.end());
+    cout << "Buku berhasil dihapus.\n";
+    
 void cariBuku() {
     string keyword;
     cout << "Masukkan kata kunci (judul/pengarang/kategori): ";
@@ -10,4 +91,3 @@ void cariBuku() {
 void urutkanBukuJudul() {
     sort(daftarBuku.begin(), daftarBuku.end(), [](Buku a, Buku b){ return a.judul < b.judul; });
     cout << "Buku berhasil diurutkan berdasarkan judul.\n";
-}
