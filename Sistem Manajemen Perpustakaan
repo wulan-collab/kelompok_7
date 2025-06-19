@@ -1,55 +1,3 @@
-void antriPinjamBuku() {
-    int id;
-    cout << "Masukkan ID Buku untuk antri: "; cin >> id;
-    antrianPinjam.push(id); // masukkan ID ke antrian
-    cout << "Buku ditambahkan ke antrian.\n";
-}
-
-void prosesAntrian() {
-    if (antrianPinjam.empty()) { // cek kalau antrian kosong
-        cout << "Antrian kosong.\n";
-        return;
-    }
-    int id = antrianPinjam.front(); // ambil ID paling depan
-             antrianPinjam.pop(); // hapus dari antrian
-    // cek apakah ID sesuai dan bukunya masih tersedia
-    for (auto& b : daftarBuku) {
-        if (b.id == id && b.tersedia) { // tandai buku sudah dipinjam
-            b.tersedia = false;
-            cout << "Buku '" << b.judul << "' berhasil dipinjam.\n";
-            return;
-        }
-    }
-    // kalau bukunya tidak ditemukan atau tidak tersedia
-    cout << "Buku tidak tersedia.\n";
-}
-
-void kembalikanBuku() {
-    int id;
-    cout << "Masukkan ID Buku yang dikembalikan: "; cin >> id;
-    for (auto& b : daftarBuku) {
-        if (b.id == id) {
-            b.tersedia = true; // tandai bukunya sudah tersedia lagi
-            // simpan riwayat pengembalian ke stack
-            riwayatKembali.push("Buku '" + b.judul + "' dikembalikan.");
-            cout << "Buku berhasil dikembalikan.\n";
-            return;
-        }
-    }
-    // jika ID tidak ditemukan di daftar buku
-    cout << "ID tidak ditemukan.\n";
-}
-
-void lihatRiwayatPengembalian() {
-    cout << "\nRiwayat Pengembalian:\n";
-    stack<string> temp = riwayatKembali; // copy stack agar data aslinya tidak hilang
-    // tampilkan isi stack dari atas (terbaru) ke bawah
-    while (!temp.empty()) {
-        cout << temp.top() << endl; // ambil paling atas
-        temp.pop(); // hapus yang sudah ditampilkan
-    }
-}
-=======
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -130,7 +78,61 @@ void hapusBuku() {
     cout << "Masukkan ID Buku: "; cin >> id;
     daftarBuku.erase(remove_if(daftarBuku.begin(), daftarBuku.end(), [id](Buku b){ return b.id == id; }), daftarBuku.end());
     cout << "Buku berhasil dihapus.\n";
-    
+
+// ====== queue dan stack =====
+// anggota 2
+void antriPinjamBuku() {
+    int id;
+    cout << "Masukkan ID Buku untuk antri: "; cin >> id;
+    antrianPinjam.push(id); // masukkan ID ke antrian
+    cout << "Buku ditambahkan ke antrian.\n";
+}
+
+void prosesAntrian() {
+    if (antrianPinjam.empty()) { // cek kalau antrian kosong
+        cout << "Antrian kosong.\n";
+        return;
+    }
+    int id = antrianPinjam.front(); // ambil ID paling depan
+             antrianPinjam.pop(); // hapus dari antrian
+    // cek apakah ID sesuai dan bukunya masih tersedia
+    for (auto& b : daftarBuku) {
+        if (b.id == id && b.tersedia) { // tandai buku sudah dipinjam
+            b.tersedia = false;
+            cout << "Buku '" << b.judul << "' berhasil dipinjam.\n";
+            return;
+        }
+    }
+    // kalau bukunya tidak ditemukan atau tidak tersedia
+    cout << "Buku tidak tersedia.\n";
+}
+
+void kembalikanBuku() {
+    int id;
+    cout << "Masukkan ID Buku yang dikembalikan: "; cin >> id;
+    for (auto& b : daftarBuku) {
+        if (b.id == id) {
+            b.tersedia = true; // tandai bukunya sudah tersedia lagi
+            // simpan riwayat pengembalian ke stack
+            riwayatKembali.push("Buku '" + b.judul + "' dikembalikan.");
+            cout << "Buku berhasil dikembalikan.\n";
+            return;
+        }
+    }
+    // jika ID tidak ditemukan di daftar buku
+    cout << "ID tidak ditemukan.\n";
+}
+
+void lihatRiwayatPengembalian() {
+    cout << "\nRiwayat Pengembalian:\n";
+    stack<string> temp = riwayatKembali; // copy stack agar data aslinya tidak hilang
+    // tampilkan isi stack dari atas (terbaru) ke bawah
+    while (!temp.empty()) {
+        cout << temp.top() << endl; // ambil paling atas
+        temp.pop(); // hapus yang sudah ditampilkan
+    }
+}
+
 void cariBuku() {
     string keyword;
     cout << "Masukkan kata kunci (judul/pengarang/kategori): ";
